@@ -1,20 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 import styles from "../styles/loginPage.module.css";
 import { useAuth } from "../hooks/useAuth";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { isLoading, errorMessage, data, submit } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     submit(email, password);
   };
 
-  console.log(data);
+  useEffect(() => {
+    if (data) navigate(`/${data.email}`);
+    else return;
+  }, [data, navigate]);
 
   return (
     <div className={styles.body}>
