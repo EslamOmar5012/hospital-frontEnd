@@ -10,9 +10,11 @@ import LoginPage from "./pages/loginPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 import ConsultantsPage from "./pages/consultantsPage.jsx";
+import NursesPage from "./pages/NursesPage.jsx";
 import { ConsultantsProvider } from "./contexts/consultantsContext.jsx";
 
 import Error from "./components/Error.jsx";
+import { NursesProvider } from "./contexts/nursesContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,10 +46,14 @@ const router = createBrowserRouter([
           </ConsultantsProvider>
         ),
       },
-      // {
-      //   path: "nurses",
-      //   element: <NursesPage />,
-      // },
+      {
+        path: "nurses",
+        element: (
+          <NursesProvider>
+            <NursesPage />
+          </NursesProvider>
+        ),
+      },
     ],
   },
 ]);

@@ -38,11 +38,12 @@ function NursesProvider({ children }) {
   };
 
   const addNurse = async (formData) => {
+    const { name, address, ward_id } = formData;
     try {
       const res = await fetch("http://127.0.0.1:3000/nurses", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ name, address, ward_id: Number(ward_id) }),
       });
 
       const data = await res.json();
