@@ -29,22 +29,6 @@ function AuthContext({ children }) {
     initialState
   );
 
-  // const submit = () => {
-  //   dispatch({ type: "submit" });
-  // };
-
-  // const logIn = (data) => {
-  //   dispatch({ type: "logIn", payload: data });
-  // };
-
-  // const logOut = () => {
-  //   dispatch({ type: "logOut" });
-  // };
-
-  // const error = (err) => {
-  //   dispatch({ type: "error", payload: err });
-  // };
-
   const submit = async (email, password) => {
     try {
       dispatch({ type: "submit" });
@@ -62,12 +46,20 @@ function AuthContext({ children }) {
       }
       throw new Error(data.message || "can't logIn right now");
     } catch (err) {
+      if (err.message === "Failed to fetch")
+        err.message = "Can't login right now";
       dispatch({ type: "error", payload: err.message });
     }
   };
 
+  const logOut = () => {
+    dispatch({ type: "logOut" });
+  };
+
   return (
-    <AuthProvider.Provider value={{ isLoading, errorMessage, data, submit }}>
+    <AuthProvider.Provider
+      value={{ isLoading, errorMessage, data, submit, logOut }}
+    >
       {children}
     </AuthProvider.Provider>
   );

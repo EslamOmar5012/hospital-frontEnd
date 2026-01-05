@@ -1,7 +1,1 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
-
-@media (min-width: 1076px) {
-  .container {
-    width: 540px;
-  }
-}
+@import "tailwindcss";
